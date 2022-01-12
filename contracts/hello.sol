@@ -1,15 +1,26 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.1;
 
-contract Helloworld{
+contract profile{
 
-    string message = "hy bhatt";
-
-    function setMessage (string memory newMessage) public payable returns(string memory){
-        message = newMessage;
-        return message;
+    struct Men{
+        string name;
+        address id;
     }
 
-    function hello() public view returns (string memory){
-        return message;
+    Men[] men;
+
+
+    mapping(address => string) person;
+
+    function setPerson(string memory _name, address _id) public {
+        Men memory _men = Men(_name, _id);
+        men.push(_men);
     }
+
+    function getPerson(uint _index) public view returns(string memory, address){
+        return(men[_index].name, men[_index].id);
+    }
+
+    
 }
